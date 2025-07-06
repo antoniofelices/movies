@@ -1,0 +1,3 @@
+# Ignore
+build
+src/routeTree.gen.ts
