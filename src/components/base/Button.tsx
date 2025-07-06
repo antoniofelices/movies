@@ -1,5 +1,5 @@
 import type { ButtonProps } from '@/types/interfaces'
-import { Link } from 'react-router'
+import { Link } from '@tanstack/react-router'
 
 const Button = ({
     classes,

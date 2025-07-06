@@ -7,7 +7,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 export type CardProps = {
     id: number
-    title: string
+    slug: string
     text: string
     image?: string
     buttonText?: string

@@ -1,18 +1,4 @@
-import type {
-    AsideSectionProps,
-    CardsSectionProps,
-    HeroSectionProps,
-} from '@/types/interfaces'
-
-const asideData: AsideSectionProps = {
-    text1: '35.000+ Already Joined',
-    text2: "Stay up-to-date with what we're doing",
-    form: {
-        textLabel: 'Sign to our newsletter',
-        textError: "Whoops, make sure it's an email",
-        textButton: 'Contact Us',
-    },
-}
+import type { CardsSectionProps, HeroSectionProps } from '@/types/interfaces'
 
 const heroData: HeroSectionProps = {
     title: 'Pricing',

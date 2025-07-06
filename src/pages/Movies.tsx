@@ -1,49 +1,51 @@
-import { useState, useEffect } from 'react'
+// import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+// import axios from 'axios'
 import Container from '@components/base/Container'
+import Card from '@components/patterns/Card'
 // import allData from '@/data/pagesData/listMovies'
-import { APILABONNEURL, REQUESTCONFIG } from '@/data/apiConfigData'
-import { fetchApiData } from '@/services/apiFetch'
-import type { PostProps } from '@/types/interfaces'
+// import { APILABONNEURL, REQUESTCONFIG } from '@/data/apiConfigData'
+// import { fetchApiData } from '@/services/apiFetch'
+// import type { PostProps } from '@/types/interfaces'
 // import { transformDate } from '@helpers/utils'
 
 function Movies() {
-    const [data, getData] = useState<PostProps[]>([])
+    // const [page, setPage] = useState(1)
 
-    const fetchData = async () => {
-        const result = await fetchApiData(APILABONNEURL, REQUESTCONFIG)
-        getData(result)
+    const fetchMovies = async () => {
+        const response = await fetch(`https://labonne.org/wp-json/wp/v2/posts`)
+        return response.json()
     }
 
-    useEffect(() => {
-        fetchData()
-    }, [])
+    // const query = useQuery({ queryKey: ['movies'], queryFn: fetchMovies })
+
+    const { isPending, isError, data, error } = useQuery({
+        queryKey: ['movies'],
+        queryFn: fetchMovies,
+    })
+
+    if (isPending) {
+        return <p>Recuperando los productos...</p>
+    }
+
+    if (isError) {
+        return <p>Error {error.message}</p>
+    }
 
     return (
         <Container>
             <h1>List Movies</h1>
-            {/* {data.map((item) => (
-                <div key={item.id} className="py-4">
-                    <a href={item.link}>
-                        <h2
-                            className="text-2xl font-bold text-blue-900 lg:text-3xl"
-                            dangerouslySetInnerHTML={{
-                                __html: item.title.rendered,
-                            }}
-                        />
-                    </a>
-                    <p
-                        className="text-xs py-4"
-                        dangerouslySetInnerHTML={{
-                            __html: transformDate(item.date),
-                        }}
-                    />
-                    <p
-                        dangerouslySetInnerHTML={{
-                            __html: item.excerpt.rendered,
-                        }}
-                    />
+            <div>
+                {/* <div>
+                    <button onClick={() => setPage(page - 1)}>Anterior</button>
+                    <button onClick={() => setPage(page + 1)}>Siguiente</button>
+                </div> */}
+                <div className="products">
+                    {data?.map((movie) => (
+                        <Card content={movie} key={movie.id} />
+                    ))}
                 </div>
-            ))} */}
+            </div>
         </Container>
     )
 }
