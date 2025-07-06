@@ -1,4 +1,4 @@
-# Sprint 7 IT Academy | API consume
+# Sprint 7 IT Academy | Movies consume APIs
 
 ## Description
 
@@ -8,22 +8,22 @@ Sprint 7
 
 ### Some decisions
 
--   Use Vite and Vitest as development tools.
--   Start using TypeScript from the beginning.
--   Include TanStack Router and TanStack Query.
+- Use Vite and Vitest as development tools.
+- Start using TypeScript from the beginning.
+- Include TanStack Router and TanStack Query.
 
 ## Technologies
 
--   JavaScript.
--   Typescript.
--   Vite.
--   Vitest.
--   Taildwind.
+- JavaScript.
+- Typescript.
+- Vite.
+- Vitest.
+- Taildwind.
 
 ## Requirements
 
--   Node.js v23.9.0
--   npm v11.2.0
+- Node.js v23.9.0
+- npm v11.2.0
 
 ## Documentation
 
@@ -49,9 +49,9 @@ $ npm run dev
 
 ## Future Improvements
 
--   Add tests.
--   Work on the Login page.
--   Move the errors to a separate log file.
+- Add tests.
+- Work on the Login page.
+- Move the errors to a separate log file.
 
 ## Contributing
 
