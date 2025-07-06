@@ -12,15 +12,20 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as FrontendRouteImport } from './routes/_frontend'
+import { Route as DashboardRouteImport } from './routes/_dashboard'
 import { Route as AuthRouteImport } from './routes/_auth'
 
 const FrontendIndexLazyRouteImport = createFileRoute('/_frontend/')()
+const DashboardMoviesLazyRouteImport = createFileRoute('/_dashboard/movies')()
 const AuthSignUpLazyRouteImport = createFileRoute('/_auth/sign-up')()
-const AuthMoviesLazyRouteImport = createFileRoute('/_auth/movies')()
 const AuthLoginLazyRouteImport = createFileRoute('/_auth/login')()
 
 const FrontendRoute = FrontendRouteImport.update({
   id: '/_frontend',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/_dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -34,16 +39,18 @@ const FrontendIndexLazyRoute = FrontendIndexLazyRouteImport.update({
 } as any).lazy(() =>
   import('./routes/_frontend/index.lazy').then((d) => d.Route),
 )
+const DashboardMoviesLazyRoute = DashboardMoviesLazyRouteImport.update({
+  id: '/movies',
+  path: '/movies',
+  getParentRoute: () => DashboardRoute,
+} as any).lazy(() =>
+  import('./routes/_dashboard/movies.lazy').then((d) => d.Route),
+)
 const AuthSignUpLazyRoute = AuthSignUpLazyRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
   getParentRoute: () => AuthRoute,
 } as any).lazy(() => import('./routes/_auth/sign-up.lazy').then((d) => d.Route))
-const AuthMoviesLazyRoute = AuthMoviesLazyRouteImport.update({
-  id: '/movies',
-  path: '/movies',
-  getParentRoute: () => AuthRoute,
-} as any).lazy(() => import('./routes/_auth/movies.lazy').then((d) => d.Route))
 const AuthLoginLazyRoute = AuthLoginLazyRouteImport.update({
   id: '/login',
   path: '/login',
@@ -52,42 +59,45 @@ const AuthLoginLazyRoute = AuthLoginLazyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginLazyRoute
-  '/movies': typeof AuthMoviesLazyRoute
   '/sign-up': typeof AuthSignUpLazyRoute
+  '/movies': typeof DashboardMoviesLazyRoute
   '/': typeof FrontendIndexLazyRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof AuthLoginLazyRoute
-  '/movies': typeof AuthMoviesLazyRoute
   '/sign-up': typeof AuthSignUpLazyRoute
+  '/movies': typeof DashboardMoviesLazyRoute
   '/': typeof FrontendIndexLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteWithChildren
+  '/_dashboard': typeof DashboardRouteWithChildren
   '/_frontend': typeof FrontendRouteWithChildren
   '/_auth/login': typeof AuthLoginLazyRoute
-  '/_auth/movies': typeof AuthMoviesLazyRoute
   '/_auth/sign-up': typeof AuthSignUpLazyRoute
+  '/_dashboard/movies': typeof DashboardMoviesLazyRoute
   '/_frontend/': typeof FrontendIndexLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/login' | '/movies' | '/sign-up' | '/'
+  fullPaths: '/login' | '/sign-up' | '/movies' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/movies' | '/sign-up' | '/'
+  to: '/login' | '/sign-up' | '/movies' | '/'
   id:
     | '__root__'
     | '/_auth'
+    | '/_dashboard'
     | '/_frontend'
     | '/_auth/login'
-    | '/_auth/movies'
     | '/_auth/sign-up'
+    | '/_dashboard/movies'
     | '/_frontend/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AuthRoute: typeof AuthRouteWithChildren
+  DashboardRoute: typeof DashboardRouteWithChildren
   FrontendRoute: typeof FrontendRouteWithChildren
 }
 
@@ -98,6 +108,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof FrontendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_dashboard': {
+      id: '/_dashboard'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
@@ -114,18 +131,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrontendIndexLazyRouteImport
       parentRoute: typeof FrontendRoute
     }
+    '/_dashboard/movies': {
+      id: '/_dashboard/movies'
+      path: '/movies'
+      fullPath: '/movies'
+      preLoaderRoute: typeof DashboardMoviesLazyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/_auth/sign-up': {
       id: '/_auth/sign-up'
       path: '/sign-up'
       fullPath: '/sign-up'
       preLoaderRoute: typeof AuthSignUpLazyRouteImport
-      parentRoute: typeof AuthRoute
-    }
-    '/_auth/movies': {
-      id: '/_auth/movies'
-      path: '/movies'
-      fullPath: '/movies'
-      preLoaderRoute: typeof AuthMoviesLazyRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/login': {
@@ -140,17 +157,27 @@ declare module '@tanstack/react-router' {
 
 interface AuthRouteChildren {
   AuthLoginLazyRoute: typeof AuthLoginLazyRoute
-  AuthMoviesLazyRoute: typeof AuthMoviesLazyRoute
   AuthSignUpLazyRoute: typeof AuthSignUpLazyRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthLoginLazyRoute: AuthLoginLazyRoute,
-  AuthMoviesLazyRoute: AuthMoviesLazyRoute,
   AuthSignUpLazyRoute: AuthSignUpLazyRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+interface DashboardRouteChildren {
+  DashboardMoviesLazyRoute: typeof DashboardMoviesLazyRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardMoviesLazyRoute: DashboardMoviesLazyRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
 
 interface FrontendRouteChildren {
   FrontendIndexLazyRoute: typeof FrontendIndexLazyRoute
@@ -166,6 +193,7 @@ const FrontendRouteWithChildren = FrontendRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
+  DashboardRoute: DashboardRouteWithChildren,
   FrontendRoute: FrontendRouteWithChildren,
 }
 export const routeTree = rootRouteImport
