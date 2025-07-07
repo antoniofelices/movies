@@ -1,6 +1,7 @@
 import Container from '@components/base/Container'
 import { useQuery } from '@tanstack/react-query'
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
+import { APIMOVIESIMAGESURL } from '@/api/moviesApiData'
 
 const SingleMovie = ({ id }) => {
     const cast = useQuery({
@@ -12,6 +13,8 @@ const SingleMovie = ({ id }) => {
         queryKey: ['singleMovie'],
         queryFn: () => getSingleMovie(id),
     })
+
+    const filterCast = cast.data?.cast?.filter((c) => c.profile_path)
 
     if (movie.isPending) {
         return <p>Loading movie...</p>
@@ -26,9 +29,18 @@ const SingleMovie = ({ id }) => {
             <h1>{movie.data.title}</h1>
             <p>{movie.data.tagline}</p>
             <p>{movie.data.overview}</p>
-            {/* {cast.data.map((item) => (
-                <h1>{item.name}</h1>
-            ))} */}
+            <h2>Cast</h2>
+            <div className="grid grid-cols-4 gap-4">
+                {filterCast.map((item) => (
+                    <div key={item.id}>
+                        <img
+                            src={`${APIMOVIESIMAGESURL}${item.profile_path}`}
+                            alt=""
+                        />
+                        <h3>{item.name}</h3>
+                    </div>
+                ))}
+            </div>
         </Container>
     )
 }

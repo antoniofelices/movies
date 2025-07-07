@@ -16,7 +16,7 @@ const Card = ({
                     src={`${APIMOVIESIMAGESURL}${content.poster_path}`}
                     height="120"
                     width="120"
-                    alt="Logo browser"
+                    alt="movie poster"
                 />
             )}
             <h2 className="items-center text-lg font-bold text-blue-900">

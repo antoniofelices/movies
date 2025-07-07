@@ -23,7 +23,7 @@ function Movies() {
         <Container>
             <h1>List Movies</h1>
             <div>
-                <div className="products">
+                <div className="grid grid-cols-3 gap-4">
                     {data?.results.map((movie) => (
                         <Card content={movie} key={movie.id} />
                     ))}
