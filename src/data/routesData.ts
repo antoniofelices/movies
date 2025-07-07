@@ -17,7 +17,7 @@ const routesData: RoutesProps[] = [
     },
     {
         id: 3,
-        url: 'movies',
+        url: 'movie/list',
         text: 'Movies',
         isInMenu: true,
         orderMenu: 2,

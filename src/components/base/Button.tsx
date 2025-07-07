@@ -10,7 +10,7 @@ const Button = ({
 }: ButtonProps) => {
     const individualClasses = classes ? classes : ''
     let variantOption =
-        'border-blue bg-blue text-white hover:border-blue hover:bg-transparent hover:text-blue'
+        'border-green bg-green hover:border-green hover:bg-transparent'
 
     if (variant === 'red') {
         variantOption =

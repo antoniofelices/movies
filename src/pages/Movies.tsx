@@ -1,11 +1,9 @@
-// import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Container from '@components/base/Container'
 import Card from '@components/patterns/Card'
 // import allData from '@/data/pagesData/listMovies'
 import { getMoviesByDiscover } from '@/services/moviesService'
 // import type { PostProps } from '@/types/interfaces'
-// import { transformDate } from '@helpers/utils'
 
 function Movies() {
     const { isPending, isError, data, error } = useQuery({
@@ -14,7 +12,7 @@ function Movies() {
     })
 
     if (isPending) {
-        return <p>Recuperando los productos...</p>
+        return <p>Loading movies...</p>
     }
 
     if (isError) {

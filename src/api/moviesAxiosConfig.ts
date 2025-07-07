@@ -17,12 +17,14 @@ apiMoviesData.interceptors.response.use(
     (error) => Promise.reject(error)
 )
 
-// const rawApiMovies = axios.create({
-//     baseURL: APIMOVIESBASEURL,
-//     headers: HEADERSCONFIG,
-//     timeout: 3000,
-// })
+const apiSingleMovieData = axios.create({
+    baseURL: APIMOVIESBASEURL,
+    headers: HEADERSCONFIG,
+    timeout: 3000,
+})
 
 const fetchDiscoverMovies = () => apiMoviesData.get(APIMOVIESQUERYDISCOVER)
+const fetchMovieById = (id) => apiSingleMovieData.get(`/movie/${id}`)
+const fetchCastByMovie = (id) => apiSingleMovieData.get(`/movie/${id}/credits`)
 
-export { fetchDiscoverMovies }
+export { fetchDiscoverMovies, fetchMovieById, fetchCastByMovie }

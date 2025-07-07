@@ -1,4 +1,4 @@
-// import Button from '@/components/base/Button'
+import Button from '@/components/base/Button'
 import type { CardProps } from '@/types/interfaces'
 import { APIMOVIESIMAGESURL } from '@/api/moviesApiData'
 
@@ -19,17 +19,16 @@ const Card = ({
                     alt="Logo browser"
                 />
             )}
-            <h3 className="items-center text-lg font-bold text-blue-900">
+            <h2 className="items-center text-lg font-bold text-blue-900">
                 {content.title}
-            </h3>
+            </h2>
             <p className="text-sm">{content.overview}</p>
-            {/* {content.buttonText && (
-                <Button
-                    type="button"
-                    text={content.buttonText}
-                    classes="text-xs"
-                />
-            )} */}
+            <Button
+                type="button"
+                text="Ver"
+                classes="text-xs"
+                url={`/movie/${content.id}`}
+            />
         </div>
     )
 }
