@@ -4,31 +4,41 @@ import { getSingleMovie, getCastMovie } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/api/moviesApiData'
 
 const SingleMovie = ({ id }: { id: number }) => {
-    const cast = useQuery({
-        queryKey: ['singleMovieCast'],
+    const {
+        data: castData,
+        isPending: castLoading,
+        isError: castError,
+        error: castErr,
+    } = useQuery({
+        queryKey: ['singleMovieCast', id],
         queryFn: () => getCastMovie(id),
     })
 
-    const movie = useQuery({
-        queryKey: ['singleMovie'],
+    const {
+        data: movie,
+        isPending: movieLoading,
+        isError: movieError,
+        error: movieErr,
+    } = useQuery({
+        queryKey: ['singleMovie', id],
         queryFn: () => getSingleMovie(id),
     })
 
-    const filterCast = cast.data?.cast?.filter((c) => c.profile_path)
+    const filterCast = castData?.cast?.filter((c) => c.profile_path)
 
-    if (movie.isPending) {
-        return <p>Loading movie...</p>
-    }
+    if (movieLoading) return <p>Loading movie...</p>
+    if (movieError)
+        return <div>Error al cargar la película: {movieErr.message}</div>
 
-    if (movie.isError) {
-        return <p>Error {movie.error.message}</p>
-    }
+    if (castLoading) return <div>Cargando reparto...</div>
+    if (castError)
+        return <div>Error al cargar el reparto: {castErr.message}</div>
 
     return (
         <Container>
-            <h1>{movie.data.title}</h1>
-            <p>{movie.data.tagline}</p>
-            <p>{movie.data.overview}</p>
+            <h1>{movie.title}</h1>
+            <p>{movie.tagline}</p>
+            <p>{movie.overview}</p>
             <h2>Cast</h2>
             <div className="grid grid-cols-4 gap-4">
                 {filterCast?.map((item) => (

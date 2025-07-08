@@ -12,13 +12,9 @@ function Movies() {
         queryFn: () => getMoviesByDiscover(),
     })
 
-    if (isPending) {
-        return <p>Loading movies...</p>
-    }
+    if (isPending) return <p>Loading movies...</p>
 
-    if (isError) {
-        return <p>Error {error.message}</p>
-    }
+    if (isError) return <p>Error {error.message}</p>
 
     return (
         <Container>
