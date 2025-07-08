@@ -5,24 +5,21 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     url?: string
     variant?: 'blue' | 'red' | 'transparent'
 }
-export type CardProps = {
-    id: number
-    slug: string
-    text: string
-    image?: string
-    buttonText?: string
-}
-export type CardsSectionProps = {
-    title: string
-    textIntro: string
-    cards: CardProps[]
+// export type CardProps = {
+//     id: number
+//     slug: string
+//     text: string
+//     image?: string
+//     buttonText?: string
+// }
+export type CardsMovieProps = {
+    textButton: string
 }
 export type HeroSectionProps = {
     title: string
     textIntro: string
     altimage?: string
-    textButton1?: string
-    textButton2?: string
+    textButton?: string
 }
 export type MovieProps = {
     id: number

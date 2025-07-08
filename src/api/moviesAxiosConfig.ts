@@ -23,6 +23,11 @@ const apiSingleMovieData = axios.create({
     timeout: 10000,
 })
 
+apiSingleMovieData.interceptors.response.use(
+    (response) => response.data,
+    (error) => Promise.reject(error)
+)
+
 const fetchDiscoverMovies = () => apiMoviesData.get(APIMOVIESQUERYDISCOVER)
 const fetchMovieById = (id: number) => apiSingleMovieData.get(`/movie/${id}`)
 const fetchCastByMovie = (id: number) =>

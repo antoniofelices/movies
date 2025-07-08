@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/api/moviesApiData'
 
-const SingleMovie = ({ id }) => {
+const SingleMovie = ({ id }: { id: number }) => {
     const cast = useQuery({
         queryKey: ['singleMovieCast'],
         queryFn: () => getCastMovie(id),
@@ -31,7 +31,7 @@ const SingleMovie = ({ id }) => {
             <p>{movie.data.overview}</p>
             <h2>Cast</h2>
             <div className="grid grid-cols-4 gap-4">
-                {filterCast.map((item) => (
+                {filterCast?.map((item) => (
                     <div key={item.id}>
                         <img
                             src={`${APIMOVIESIMAGESURL}${item.profile_path}`}
