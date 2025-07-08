@@ -52,3 +52,7 @@ export type RoutesProps = {
     isInMenu: boolean
     orderMenu?: number
 }
+
+// export type RouterContext = {
+//     authentication: AuthContext
+// }
