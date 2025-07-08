@@ -47,12 +47,8 @@ export type PostProps = {
 
 export type RoutesProps = {
     id: number
-    text: string
     url: string
+    text: string
     isInMenu: boolean
     orderMenu?: number
 }
-
-// export type RouterContext = {
-//     authentication: AuthContext
-// }

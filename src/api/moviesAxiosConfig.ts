@@ -24,7 +24,8 @@ const apiSingleMovieData = axios.create({
 })
 
 const fetchDiscoverMovies = () => apiMoviesData.get(APIMOVIESQUERYDISCOVER)
-const fetchMovieById = (id) => apiSingleMovieData.get(`/movie/${id}`)
-const fetchCastByMovie = (id) => apiSingleMovieData.get(`/movie/${id}/credits`)
+const fetchMovieById = (id: number) => apiSingleMovieData.get(`/movie/${id}`)
+const fetchCastByMovie = (id: number) =>
+    apiSingleMovieData.get(`/movie/${id}/credits`)
 
 export { fetchDiscoverMovies, fetchMovieById, fetchCastByMovie }

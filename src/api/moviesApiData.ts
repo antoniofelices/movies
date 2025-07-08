@@ -4,7 +4,7 @@ const APIKEYMOVIES = import.meta.env.VITE_API_MOVIES
 const APITOKENMOVIES = import.meta.env.VITE_API_MOVIES_TOKEN
 const APIMOVIESIMAGESURL = 'https://image.tmdb.org/t/p/original'
 
-const HEADERSCONFIG: HeadersInit = {
+const HEADERSCONFIG = {
     Accept: 'application/json',
     Authorization: `Bearer ${APITOKENMOVIES}`,
 }
