@@ -20,7 +20,7 @@ apiMoviesData.interceptors.response.use(
 const apiSingleMovieData = axios.create({
     baseURL: APIMOVIESBASEURL,
     headers: HEADERSCONFIG,
-    timeout: 3000,
+    timeout: 10000,
 })
 
 const fetchDiscoverMovies = () => apiMoviesData.get(APIMOVIESQUERYDISCOVER)

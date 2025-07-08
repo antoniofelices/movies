@@ -24,25 +24,14 @@ export type HeroSectionProps = {
     textButton1?: string
     textButton2?: string
 }
-export type PostProps = {
+export type MovieProps = {
     id: number
-    date: string
-    excerpt: { rendered: string }
-    link: string
-    title: { rendered: string }
-    content: { rendered: string }
-    _embedded?: {
-        'wp:featuredmedia': {
-            id: number
-            media_details: {
-                sizes: {
-                    medium: {
-                        source_url: string
-                    }
-                }
-            }
-        }[]
-    }
+    overview: string
+    poster_path?: string
+    tagline: string
+    title: string
+    vote_average: number
+    vote_count: number
 }
 
 export type RoutesProps = {

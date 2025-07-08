@@ -9,12 +9,12 @@ const getMoviesByDiscover = async () => {
     return response
 }
 
-const getSingleMovie = async (id) => {
+const getSingleMovie = async (id: number) => {
     const response = await fetchMovieById(id)
     return response.data
 }
 
-const getCastMovie = async (id) => {
+const getCastMovie = async (id: number) => {
     const response = await fetchCastByMovie(id)
     return response.data
 }
