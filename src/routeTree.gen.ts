@@ -18,6 +18,7 @@ import { Route as AuthMovieIdRouteImport } from './routes/_auth/movie/$id'
 const SignUpLazyRouteImport = createFileRoute('/sign-up')()
 const LoginLazyRouteImport = createFileRoute('/login')()
 const FrontendIndexLazyRouteImport = createFileRoute('/_frontend/')()
+const AuthProfileLazyRouteImport = createFileRoute('/_auth/profile')()
 const AuthMovieListLazyRouteImport = createFileRoute('/_auth/movie/list')()
 
 const SignUpLazyRoute = SignUpLazyRouteImport.update({
@@ -45,6 +46,11 @@ const FrontendIndexLazyRoute = FrontendIndexLazyRouteImport.update({
 } as any).lazy(() =>
   import('./routes/_frontend/index.lazy').then((d) => d.Route),
 )
+const AuthProfileLazyRoute = AuthProfileLazyRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthRoute,
+} as any).lazy(() => import('./routes/_auth/profile.lazy').then((d) => d.Route))
 const AuthMovieListLazyRoute = AuthMovieListLazyRouteImport.update({
   id: '/movie/list',
   path: '/movie/list',
@@ -61,6 +67,7 @@ const AuthMovieIdRoute = AuthMovieIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/login': typeof LoginLazyRoute
   '/sign-up': typeof SignUpLazyRoute
+  '/profile': typeof AuthProfileLazyRoute
   '/': typeof FrontendIndexLazyRoute
   '/movie/$id': typeof AuthMovieIdRoute
   '/movie/list': typeof AuthMovieListLazyRoute
@@ -68,6 +75,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/login': typeof LoginLazyRoute
   '/sign-up': typeof SignUpLazyRoute
+  '/profile': typeof AuthProfileLazyRoute
   '/': typeof FrontendIndexLazyRoute
   '/movie/$id': typeof AuthMovieIdRoute
   '/movie/list': typeof AuthMovieListLazyRoute
@@ -78,21 +86,29 @@ export interface FileRoutesById {
   '/_frontend': typeof FrontendRouteWithChildren
   '/login': typeof LoginLazyRoute
   '/sign-up': typeof SignUpLazyRoute
+  '/_auth/profile': typeof AuthProfileLazyRoute
   '/_frontend/': typeof FrontendIndexLazyRoute
   '/_auth/movie/$id': typeof AuthMovieIdRoute
   '/_auth/movie/list': typeof AuthMovieListLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/login' | '/sign-up' | '/' | '/movie/$id' | '/movie/list'
+  fullPaths:
+    | '/login'
+    | '/sign-up'
+    | '/profile'
+    | '/'
+    | '/movie/$id'
+    | '/movie/list'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/sign-up' | '/' | '/movie/$id' | '/movie/list'
+  to: '/login' | '/sign-up' | '/profile' | '/' | '/movie/$id' | '/movie/list'
   id:
     | '__root__'
     | '/_auth'
     | '/_frontend'
     | '/login'
     | '/sign-up'
+    | '/_auth/profile'
     | '/_frontend/'
     | '/_auth/movie/$id'
     | '/_auth/movie/list'
@@ -142,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrontendIndexLazyRouteImport
       parentRoute: typeof FrontendRoute
     }
+    '/_auth/profile': {
+      id: '/_auth/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthProfileLazyRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/movie/list': {
       id: '/_auth/movie/list'
       path: '/movie/list'
@@ -160,11 +183,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthRouteChildren {
+  AuthProfileLazyRoute: typeof AuthProfileLazyRoute
   AuthMovieIdRoute: typeof AuthMovieIdRoute
   AuthMovieListLazyRoute: typeof AuthMovieListLazyRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthProfileLazyRoute: AuthProfileLazyRoute,
   AuthMovieIdRoute: AuthMovieIdRoute,
   AuthMovieListLazyRoute: AuthMovieListLazyRoute,
 }
