@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query'
 import Container from '@components/base/Container'
 import MovieCard from '@/components/patterns/MovieCard'

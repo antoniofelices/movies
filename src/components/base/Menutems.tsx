@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { RoutesProps } from '@/types/interfaces'
 import { Link } from '@tanstack/react-router'
 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import type { MovieProps, CreditsMovieProps } from '@/types/interfaces'
 
 import {
     APIMOVIESBASEURL,
@@ -29,8 +30,9 @@ apiSingleMovieData.interceptors.response.use(
 )
 
 const fetchDiscoverMovies = () => apiMoviesData.get(APIMOVIESQUERYDISCOVER)
-const fetchMovieById = (id: number) => apiSingleMovieData.get(`/movie/${id}`)
-const fetchCastByMovie = (id: number) =>
+const fetchMovieById = (id: number): Promise<MovieProps> =>
+    apiSingleMovieData.get(`/movie/${id}`)
+const fetchCastByMovie = (id: number): Promise<CreditsMovieProps> =>
     apiSingleMovieData.get(`/movie/${id}/credits`)
 
 export { fetchDiscoverMovies, fetchMovieById, fetchCastByMovie }

@@ -23,12 +23,23 @@ export type HeroSectionProps = {
 }
 export type MovieProps = {
     id: number
-    overview: string
+    overview?: string
     poster_path?: string
-    tagline: string
+    tagline?: string
     title: string
-    vote_average: number
-    vote_count: number
+    vote_average?: number
+    vote_count?: number
+}
+
+export type CastProps = {
+    id: number
+    name: string
+    profile_path?: string
+}
+
+export type CreditsMovieProps = {
+    id: number
+    cast: CastProps[]
 }
 
 export type RoutesProps = {
