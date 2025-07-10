@@ -33,7 +33,7 @@ const FormAuth = ({
                         </label>
                         <input
                             type="text"
-                            name="text"
+                            name="username"
                             id={userNameId}
                             className=""
                             placeholder={content.labelUserName}
