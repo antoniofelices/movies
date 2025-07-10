@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/services/supabaseService'
 import { useNavigate } from '@tanstack/react-router'
 import Container from '@components/base/Container'
 

@@ -55,3 +55,10 @@ export type Form = {
     textButtonSignIn?: string
     textButtonSignUp?: string
 }
+
+export type SignUpErrors = {
+    noEmailPassword: boolean
+    repeatEmail: boolean
+    register: boolean
+    message: string
+}

@@ -3,7 +3,7 @@ import { useRouter } from '@tanstack/react-router'
 import Container from '@components/base/Container'
 import Button from '@/components/base/Button'
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
-import { APIMOVIESIMAGESURL } from '@/api/moviesApiData'
+import { APIMOVIESIMAGESURL } from '@/config/config'
 
 const SingleMovie = ({ id }: { id: number }) => {
     const router = useRouter()

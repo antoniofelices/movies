@@ -1,37 +1,37 @@
 import { useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import Container from '@components/base/Container'
 import FormAuth from '@/components/patterns/FormAuth'
 import content from '@data/formAuth'
-import { supabase } from '@/lib/supabaseClient'
-import { useNavigate } from '@tanstack/react-router'
-import { Link } from '@tanstack/react-router'
+import { registerUser } from '@/services/supabaseService'
+import { initialErrors, getUserData, errorHandler } from '@helpers/signUpUtils'
+import type { SignUpErrors } from '@/types/interfaces'
+
+const Errors = (errors: SignUpErrors) => {
+    return (
+        <>
+            {errors.noEmailPassword && <p>No email or password fields.</p>}
+            {errors.repeatEmail && (
+                <>
+                    <p>The email was registered.</p>
+                    <Link to={'/sign-in'}>Sign in</Link>
+                </>
+            )}
+            {errors.register && <p>Error: {errors.message}</p>}
+        </>
+    )
+}
 
 const SignUp = () => {
     const navigate = useNavigate()
-
-    const getUserData = (formData: FormData) => ({
-        confirmpassword: formData.get('confirmpassword') as string,
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
-        username: formData.get('username') as string,
-    })
+    const [errors, setErrors] = useState(initialErrors)
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const client = getUserData(formData)
         await registerHandler(client)
-    }
-
-    const [errors, setErrors] = useState({
-        noEmailPassword: false,
-        repeatEmail: false,
-        register: false,
-        message: '',
-    })
-
-    const errorHandler = (error: any) => {
-        setErrors(error)
     }
 
     const registerHandler = async ({
@@ -43,26 +43,23 @@ const SignUp = () => {
         password: string
         username: string
     }) => {
+        setErrors(initialErrors)
+
         if (!email || !password) {
-            errorHandler({ ...errors, noEmailPassword: true })
+            errorHandler(setErrors, { noEmailPassword: true })
             return
         }
 
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-            options: {
-                data: {
-                    username: username,
-                },
-            },
-        })
+        const { error } = await registerUser(email, password, username)
 
         if (error) {
             if (error.message.includes('User already registered')) {
-                errorHandler({ ...errors, repeatEmail: true })
+                errorHandler(setErrors, { repeatEmail: true })
             } else {
-                errorHandler({ ...errors, message: error.message })
+                errorHandler(setErrors, {
+                    register: true,
+                    message: error.message,
+                })
             }
             return
         }
@@ -78,14 +75,7 @@ const SignUp = () => {
                 onSubmit={submitHandler}
                 actionType="sign-up"
             />
-            {errors.noEmailPassword && <p>No email or password fields.</p>}
-            {errors.repeatEmail && (
-                <>
-                    <p>The email was registered.</p>
-                    <Link to={'/sign-in'}>Sign in</Link>
-                </>
-            )}
-            {errors.register && <p>Error: {errors.message}</p>}
+            <Errors {...errors} />
         </Container>
     )
 }

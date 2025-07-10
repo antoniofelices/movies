@@ -2,7 +2,7 @@ import {
     fetchDiscoverMovies,
     fetchMovieById,
     fetchCastByMovie,
-} from '@/api/moviesAxiosConfig'
+} from '@/config/moviesAxiosConfig'
 
 const getMoviesByDiscover = async () => {
     const response = await fetchDiscoverMovies()

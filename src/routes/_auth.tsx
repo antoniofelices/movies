@@ -1,5 +1,5 @@
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/services/supabaseService'
 import Header from '@layouts/Header'
 
 export const Route = createFileRoute('/_auth')({

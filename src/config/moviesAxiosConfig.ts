@@ -5,7 +5,7 @@ import {
     APIMOVIESBASEURL,
     HEADERSCONFIG,
     APIMOVIESQUERYDISCOVER,
-} from '@/api/moviesApiData'
+} from '@/config/config'
 
 const apiMoviesData = axios.create({
     baseURL: APIMOVIESBASEURL,

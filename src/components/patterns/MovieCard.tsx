@@ -1,6 +1,6 @@
 import Button from '@/components/base/Button'
 import type { MovieProps } from '@/types/interfaces'
-import { APIMOVIESIMAGESURL } from '@/api/moviesApiData'
+import { APIMOVIESIMAGESURL } from '@/config/config'
 
 const MovieCard = ({ content }: { content: MovieProps }) => {
     return (

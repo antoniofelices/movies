@@ -1,7 +1,7 @@
 import Container from '@components/base/Container'
 import FormAuth from '@/components/patterns/FormAuth'
 import content from '@/data/formAuth'
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '@/services/supabaseService'
 import { useNavigate } from '@tanstack/react-router'
 
 const SignIn = () => {
