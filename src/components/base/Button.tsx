@@ -3,6 +3,7 @@ import { Link } from '@tanstack/react-router'
 
 const Button = ({
     classes,
+    onClick,
     text,
     url,
     variant,
@@ -26,6 +27,7 @@ const Button = ({
         <>
             <button
                 className={`rounded-lg border-2 px-3 py-2 font-bold text-sm ${variantOption} ${individualClasses}`}
+                onClick={onClick}
                 type={type}
             >
                 {url ? <Link to={url}>{text}</Link> : <>{text}</>}

@@ -1,9 +1,13 @@
-import Container from '@components/base/Container'
 import { useQuery } from '@tanstack/react-query'
+import { useRouter } from '@tanstack/react-router'
+import Container from '@components/base/Container'
+import Button from '@/components/base/Button'
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/api/moviesApiData'
 
 const SingleMovie = ({ id }: { id: number }) => {
+    const router = useRouter()
+
     const {
         data: castData,
         isPending: castLoading,
@@ -34,11 +38,16 @@ const SingleMovie = ({ id }: { id: number }) => {
     if (castError)
         return <div>Error al cargar el reparto: {castErr.message}</div>
 
+    const backHandler = () => {
+        router.history.back()
+    }
+
     return (
         <Container>
             <h1>{movie.title}</h1>
             <p>{movie.tagline}</p>
             <p>{movie.overview}</p>
+            <Button onClick={backHandler} text="Volver" />
             <h2>Cast</h2>
             <div className="grid grid-cols-4 gap-4">
                 {filterCast?.map((item) => (

@@ -29,7 +29,7 @@ function Login() {
         email: string
         password: string
     }) => {
-        if (!email || !password) return <h1>TODO: Field the fields bitch</h1>
+        if (!email || !password) return <h1>TODO: Fill the fields bitch</h1>
         const { error } = await supabase.auth.signInWithPassword({
             email: email,
             password: password,
