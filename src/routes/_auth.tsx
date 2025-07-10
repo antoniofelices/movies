@@ -6,7 +6,7 @@ export const Route = createFileRoute('/_auth')({
     beforeLoad: async () => {
         const { data } = await supabase.auth.getSession()
         if (!data.session) {
-            throw redirect({ to: '/login' })
+            throw redirect({ to: '/sign-in' })
         }
     },
     component: AuthLayout,

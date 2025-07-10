@@ -1,10 +1,10 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import Login from '@pages/Login'
+import SignIn from '@/pages/SignIn'
 
-export const Route = createLazyFileRoute('/login')({
+export const Route = createLazyFileRoute('/sign-in')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
-    return <Login />
+    return <SignIn />
 }

@@ -5,7 +5,7 @@ import MovieCard from '@/components/patterns/MovieCard'
 import { getMoviesByDiscover } from '@/services/moviesService'
 import type { MovieProps } from '@/types/interfaces'
 
-function Movies() {
+const Movies = () => {
     const { isPending, isError, data, error } = useQuery({
         queryKey: ['movies'],
         queryFn: () => getMoviesByDiscover(),

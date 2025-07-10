@@ -4,7 +4,8 @@ const allData = {
     labelPassword: 'Password',
     labelConfirmPassword: 'Confirm Password',
     textError: 'Field required',
-    textButton: 'Sign Up',
+    textButtonSignIn: 'Sign In',
+    textButtonSignUp: 'Sign Up',
 }
 
 export default allData

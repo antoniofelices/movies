@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react'
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    text: string
+    text: string | undefined
     classes?: string
     url?: string
     variant?: 'blue' | 'red' | 'transparent'
@@ -44,4 +44,14 @@ export type RoutesProps = {
     text: string
     isInMenu: boolean
     orderMenu?: number
+}
+
+export type Form = {
+    labelConfirmPassword?: string
+    labelEmail: string
+    labelPassword: string
+    labelUserName?: string
+    textError: string
+    textButtonSignIn?: string
+    textButtonSignUp?: string
 }

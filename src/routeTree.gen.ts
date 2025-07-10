@@ -16,7 +16,7 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AuthMovieIdRouteImport } from './routes/_auth/movie/$id'
 
 const SignUpLazyRouteImport = createFileRoute('/sign-up')()
-const LoginLazyRouteImport = createFileRoute('/login')()
+const SignInLazyRouteImport = createFileRoute('/sign-in')()
 const FrontendIndexLazyRouteImport = createFileRoute('/_frontend/')()
 const AuthProfileLazyRouteImport = createFileRoute('/_auth/profile')()
 const AuthMovieListLazyRouteImport = createFileRoute('/_auth/movie/list')()
@@ -26,11 +26,11 @@ const SignUpLazyRoute = SignUpLazyRouteImport.update({
   path: '/sign-up',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/sign-up.lazy').then((d) => d.Route))
-const LoginLazyRoute = LoginLazyRouteImport.update({
-  id: '/login',
-  path: '/login',
+const SignInLazyRoute = SignInLazyRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/sign-in.lazy').then((d) => d.Route))
 const FrontendRoute = FrontendRouteImport.update({
   id: '/_frontend',
   getParentRoute: () => rootRouteImport,
@@ -65,7 +65,7 @@ const AuthMovieIdRoute = AuthMovieIdRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/login': typeof LoginLazyRoute
+  '/sign-in': typeof SignInLazyRoute
   '/sign-up': typeof SignUpLazyRoute
   '/profile': typeof AuthProfileLazyRoute
   '/': typeof FrontendIndexLazyRoute
@@ -73,7 +73,7 @@ export interface FileRoutesByFullPath {
   '/movie/list': typeof AuthMovieListLazyRoute
 }
 export interface FileRoutesByTo {
-  '/login': typeof LoginLazyRoute
+  '/sign-in': typeof SignInLazyRoute
   '/sign-up': typeof SignUpLazyRoute
   '/profile': typeof AuthProfileLazyRoute
   '/': typeof FrontendIndexLazyRoute
@@ -84,7 +84,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteWithChildren
   '/_frontend': typeof FrontendRouteWithChildren
-  '/login': typeof LoginLazyRoute
+  '/sign-in': typeof SignInLazyRoute
   '/sign-up': typeof SignUpLazyRoute
   '/_auth/profile': typeof AuthProfileLazyRoute
   '/_frontend/': typeof FrontendIndexLazyRoute
@@ -94,19 +94,19 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/login'
+    | '/sign-in'
     | '/sign-up'
     | '/profile'
     | '/'
     | '/movie/$id'
     | '/movie/list'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/sign-up' | '/profile' | '/' | '/movie/$id' | '/movie/list'
+  to: '/sign-in' | '/sign-up' | '/profile' | '/' | '/movie/$id' | '/movie/list'
   id:
     | '__root__'
     | '/_auth'
     | '/_frontend'
-    | '/login'
+    | '/sign-in'
     | '/sign-up'
     | '/_auth/profile'
     | '/_frontend/'
@@ -117,7 +117,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthRoute: typeof AuthRouteWithChildren
   FrontendRoute: typeof FrontendRouteWithChildren
-  LoginLazyRoute: typeof LoginLazyRoute
+  SignInLazyRoute: typeof SignInLazyRoute
   SignUpLazyRoute: typeof SignUpLazyRoute
 }
 
@@ -130,11 +130,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignUpLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginLazyRouteImport
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_frontend': {
@@ -211,7 +211,7 @@ const FrontendRouteWithChildren = FrontendRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   FrontendRoute: FrontendRouteWithChildren,
-  LoginLazyRoute: LoginLazyRoute,
+  SignInLazyRoute: SignInLazyRoute,
   SignUpLazyRoute: SignUpLazyRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,10 +1,10 @@
 import Container from '@components/base/Container'
 import FormAuth from '@/components/patterns/FormAuth'
-import content from '@data/formAuth'
+import content from '@/data/formAuth'
 import { supabase } from '@/lib/supabaseClient'
 import { useNavigate } from '@tanstack/react-router'
 
-const SignUp = () => {
+const SignIn = () => {
     const navigate = useNavigate()
 
     const getUserData = (formData: FormData) => ({
@@ -40,14 +40,14 @@ const SignUp = () => {
 
     return (
         <Container>
-            <h1>Sign Up</h1>
+            <h1>Sign In</h1>
             <FormAuth
                 content={content}
                 onSubmit={submitHandler}
-                actionType="sign-up"
+                actionType="sign-in"
             />
         </Container>
     )
 }
 
-export default SignUp
+export default SignIn
