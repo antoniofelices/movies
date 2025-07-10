@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import Container from '@components/base/Container'
 import FormAuth from '@/components/patterns/FormAuth'
 import content from '@data/formAuth'
 import { supabase } from '@/lib/supabaseClient'
 import { useNavigate } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -21,6 +23,17 @@ const SignUp = () => {
         await registerHandler(client)
     }
 
+    const [errors, setErrors] = useState({
+        noEmailPassword: false,
+        repeatEmail: false,
+        register: false,
+        message: '',
+    })
+
+    const errorHandler = (error: any) => {
+        setErrors(error)
+    }
+
     const registerHandler = async ({
         email,
         password,
@@ -30,7 +43,11 @@ const SignUp = () => {
         password: string
         username: string
     }) => {
-        if (!email || !password) return <h1>TODO: Fill the fields bitch</h1>
+        if (!email || !password) {
+            errorHandler({ ...errors, noEmailPassword: true })
+            return
+        }
+
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
@@ -42,11 +59,14 @@ const SignUp = () => {
         })
 
         if (error) {
-            console.error('Error al registrar:', error.message)
+            if (error.message.includes('User already registered')) {
+                errorHandler({ ...errors, repeatEmail: true })
+            } else {
+                errorHandler({ ...errors, message: error.message })
+            }
             return
         }
 
-        console.log('Usuario registrado:', data)
         navigate({ to: '/profile' })
     }
 
@@ -58,6 +78,14 @@ const SignUp = () => {
                 onSubmit={submitHandler}
                 actionType="sign-up"
             />
+            {errors.noEmailPassword && <p>No email or password fields.</p>}
+            {errors.repeatEmail && (
+                <>
+                    <p>The email was registered.</p>
+                    <Link to={'/sign-in'}>Sign in</Link>
+                </>
+            )}
+            {errors.register && <p>Error: {errors.message}</p>}
         </Container>
     )
 }

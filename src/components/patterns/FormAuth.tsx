@@ -59,10 +59,11 @@ const FormAuth = ({
                         {content.labelPassword}
                     </label>
                     <input
-                        type="text"
+                        type="password"
                         name="password"
                         id={passwordId}
                         className=""
+                        pattern=".{6,}"
                         placeholder={content.labelPassword}
                         required
                     />
@@ -73,9 +74,10 @@ const FormAuth = ({
                             {content.labelConfirmPassword}
                         </label>
                         <input
-                            type="text"
+                            type="password"
                             name="confirmpassword"
                             id={confirmPasswordId}
+                            pattern=".{6,}"
                             className=""
                             placeholder={content.labelConfirmPassword}
                             required
