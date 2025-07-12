@@ -3,7 +3,6 @@ import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import Container from '@components/base/Container'
 import MovieCard from '@/components/patterns/MovieCard'
-import { heroData } from '@/data/pagesData/moviesList'
 import { getMoviesByDiscover } from '@/services/moviesService'
 import type { MovieProps } from '@/types/interfaces'
 
