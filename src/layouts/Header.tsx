@@ -1,6 +1,7 @@
 import Logo from '@/components/base/Logo'
 import MenuItems from '@/components/base/Menutems'
-import mainMenuData from '@/data/routesData'
+import mainMenuData from '@/data/mainMenuData'
+import userMenuData from '@/data/userMenuData'
 import { Link } from '@tanstack/react-router'
 
 const Header = () => {
@@ -26,6 +27,9 @@ const Header = () => {
                     </nav>
                 </div>
             </div>
+            <ul>
+                <MenuItems content={userMenuData} />
+            </ul>
         </header>
     )
 }

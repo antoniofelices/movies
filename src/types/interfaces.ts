@@ -42,7 +42,7 @@ export type RoutesProps = {
     id: number
     url: string
     text: string
-    isInMenu: boolean
+    isLogging?: boolean
     orderMenu?: number
 }
 
