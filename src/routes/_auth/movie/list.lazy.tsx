@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import Movies from '@pages/Movies'
+import MovieList from '@/pages/MovieList'
 
 export const Route = createLazyFileRoute('/_auth/movie/list')({
     component: RouteComponent,
@@ -8,7 +8,7 @@ export const Route = createLazyFileRoute('/_auth/movie/list')({
 function RouteComponent() {
     return (
         <>
-            <Movies />
+            <MovieList />
         </>
     )
 }
