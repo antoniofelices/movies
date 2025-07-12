@@ -3,7 +3,7 @@ import Container from '@components/base/Container'
 import FormAuth from '@/components/patterns/FormAuth'
 import contentForm from '@/data/formAuth'
 import { signInWithPassword } from '@/services/supabaseService'
-import { getUserData } from '@helpers/signUpUtils'
+import { getUserData } from '@/helpers/formAuthUtils'
 import { useFormErrors } from '@/hooks/useFormErrors'
 
 const SignIn = () => {

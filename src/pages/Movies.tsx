@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import Loading from '@components/base/Loading'
 import Container from '@components/base/Container'
 import MovieCard from '@/components/patterns/MovieCard'
 // import allData from '@/data/pagesData/listMovies'
@@ -11,7 +12,7 @@ const Movies = () => {
         queryFn: () => getMoviesByDiscover(),
     })
 
-    if (isPending) return <p>Loading movies...</p>
+    if (isPending) return <Loading />
 
     if (isError) return <p>Error {error.message}</p>
 

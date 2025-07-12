@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from '@tanstack/react-router'
+import Loading from '@components/base/Loading'
 import Container from '@components/base/Container'
 import Button from '@/components/base/Button'
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
@@ -30,11 +31,10 @@ const SingleMovie = ({ id }: { id: number }) => {
 
     const filterCast = castData?.cast?.filter((c) => c.profile_path)
 
-    if (movieLoading) return <p>Loading movie...</p>
+    if (movieLoading || castLoading) return <Loading />
+
     if (movieError)
         return <div>Error al cargar la película: {movieErr.message}</div>
-
-    if (castLoading) return <div>Cargando reparto...</div>
     if (castError)
         return <div>Error al cargar el reparto: {castErr.message}</div>
 
