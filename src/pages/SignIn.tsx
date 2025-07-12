@@ -1,12 +1,12 @@
 import { useNavigate } from '@tanstack/react-router'
 import Container from '@components/base/Container'
 import FormAuth from '@/components/patterns/FormAuth'
-import contentForm from '@data/formAuth'
-import { registerUser } from '@/services/supabaseService'
+import contentForm from '@/data/formAuth'
+import { signInWithPassword } from '@/services/supabaseService'
 import { getUserData } from '@/helpers/formAuthUtils'
 import { useFormErrors } from '@/hooks/useFormErrors'
 
-const SignUp = () => {
+const SignIn = () => {
     const navigate = useNavigate()
     const { errors, errorHandler, resetErrors } = useFormErrors()
 
@@ -14,17 +14,15 @@ const SignUp = () => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const client = getUserData(formData)
-        await registerHandler(client)
+        await loginHandler(client)
     }
 
-    const registerHandler = async ({
+    const loginHandler = async ({
         email,
         password,
-        username,
     }: {
         email: string
         password: string
-        username: string
     }) => {
         resetErrors()
 
@@ -33,28 +31,24 @@ const SignUp = () => {
             return
         }
 
-        const { error } = await registerUser(email, password, username)
+        const { error } = await signInWithPassword(email, password)
 
         if (error) {
-            if (error.message.includes('User already registered')) {
-                errorHandler({ repeatEmail: true })
-            } else {
-                errorHandler({
-                    isError: true,
-                    message: error.message,
-                })
-            }
+            errorHandler({
+                isError: true,
+                message: error.message,
+            })
             return
         }
 
-        navigate({ to: '/profile' })
+        navigate({ to: '/movie/list' })
     }
 
     return (
         <Container>
-            <h1>Sign Up</h1>
+            <h1>Sign In</h1>
             <FormAuth
-                actionType="sign-up"
+                actionType="sign-in"
                 content={contentForm}
                 errors={errors}
                 onSubmit={submitHandler}
@@ -63,4 +57,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default SignIn

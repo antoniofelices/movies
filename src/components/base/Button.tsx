@@ -1,8 +1,9 @@
 import type { ButtonProps } from '@/types/interfaces'
-import { Link } from 'react-router'
+import { Link } from '@tanstack/react-router'
 
 const Button = ({
     classes,
+    onClick,
     text,
     url,
     variant,
@@ -10,7 +11,7 @@ const Button = ({
 }: ButtonProps) => {
     const individualClasses = classes ? classes : ''
     let variantOption =
-        'border-blue bg-blue text-white hover:border-blue hover:bg-transparent hover:text-blue'
+        'border-green bg-green hover:border-green hover:bg-transparent'
 
     if (variant === 'red') {
         variantOption =
@@ -26,6 +27,7 @@ const Button = ({
         <>
             <button
                 className={`rounded-lg border-2 px-3 py-2 font-bold text-sm ${variantOption} ${individualClasses}`}
+                onClick={onClick}
                 type={type}
             >
                 {url ? <Link to={url}>{text}</Link> : <>{text}</>}

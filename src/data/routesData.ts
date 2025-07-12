@@ -10,14 +10,14 @@ const routesData: RoutesProps[] = [
     },
     {
         id: 2,
-        url: 'login',
-        text: 'Login',
+        url: 'sign-in',
+        text: 'Sign In',
         isInMenu: true,
         orderMenu: 10,
     },
     {
         id: 3,
-        url: 'movies',
+        url: 'movie/list',
         text: 'Movies',
         isInMenu: true,
         orderMenu: 2,
