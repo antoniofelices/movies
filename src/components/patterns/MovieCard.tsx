@@ -28,10 +28,8 @@ const MovieCard = ({ content }: { content: MovieProps }) => {
                     alt={`movie poster ${content.title}`}
                 />
             )}
-            <div className="flex flex-col items-center justify-between gap-5 bg-white dark:bg-blue-500 p-6 lg:mx-0">
-                <h2 className="items-center text-sm font-bold">
-                    {content.title}
-                </h2>
+            <div className="bg-white dark:bg-blue-500 p-6 lg:mx-0">
+                <h2 className="text-sm font-bold">{content.title}</h2>
             </div>
         </div>
     )
