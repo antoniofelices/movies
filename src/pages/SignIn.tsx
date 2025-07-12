@@ -1,16 +1,14 @@
+import { useNavigate } from '@tanstack/react-router'
 import Container from '@components/base/Container'
 import FormAuth from '@/components/patterns/FormAuth'
-import content from '@/data/formAuth'
-import { supabase } from '@/services/supabaseService'
-import { useNavigate } from '@tanstack/react-router'
+import contentForm from '@/data/formAuth'
+import { signInWithPassword } from '@/services/supabaseService'
+import { getUserData } from '@helpers/signUpUtils'
+import { useFormErrors } from '@/hooks/useFormErrors'
 
 const SignIn = () => {
     const navigate = useNavigate()
-
-    const getUserData = (formData: FormData) => ({
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
-    })
+    const { errors, errorHandler, resetErrors } = useFormErrors()
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -26,25 +24,34 @@ const SignIn = () => {
         email: string
         password: string
     }) => {
-        if (!email || !password) return <h1>TODO: Fill the fields bitch</h1>
-        const { error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password,
-        })
-        if (!error) {
-            navigate({ to: '/movie/list' })
-        } else {
-            alert('Error al iniciar sesión')
+        resetErrors()
+
+        if (!email || !password) {
+            errorHandler({ noEmailPassword: true })
+            return
         }
+
+        const { error } = await signInWithPassword(email, password)
+
+        if (error) {
+            errorHandler({
+                isError: true,
+                message: error.message,
+            })
+            return
+        }
+
+        navigate({ to: '/movie/list' })
     }
 
     return (
         <Container>
             <h1>Sign In</h1>
             <FormAuth
-                content={content}
-                onSubmit={submitHandler}
                 actionType="sign-in"
+                content={contentForm}
+                errors={errors}
+                onSubmit={submitHandler}
             />
         </Container>
     )

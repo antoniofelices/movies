@@ -1,31 +1,14 @@
-import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { Link } from '@tanstack/react-router'
 import Container from '@components/base/Container'
 import FormAuth from '@/components/patterns/FormAuth'
-import content from '@data/formAuth'
+import contentForm from '@data/formAuth'
 import { registerUser } from '@/services/supabaseService'
-import { initialErrors, getUserData, errorHandler } from '@helpers/signUpUtils'
-import type { SignUpErrors } from '@/types/interfaces'
-
-const Errors = (errors: SignUpErrors) => {
-    return (
-        <>
-            {errors.noEmailPassword && <p>No email or password fields.</p>}
-            {errors.repeatEmail && (
-                <>
-                    <p>The email was registered.</p>
-                    <Link to={'/sign-in'}>Sign in</Link>
-                </>
-            )}
-            {errors.register && <p>Error: {errors.message}</p>}
-        </>
-    )
-}
+import { getUserData } from '@helpers/signUpUtils'
+import { useFormErrors } from '@/hooks/useFormErrors'
 
 const SignUp = () => {
     const navigate = useNavigate()
-    const [errors, setErrors] = useState(initialErrors)
+    const { errors, errorHandler, resetErrors } = useFormErrors()
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -43,10 +26,10 @@ const SignUp = () => {
         password: string
         username: string
     }) => {
-        setErrors(initialErrors)
+        resetErrors()
 
         if (!email || !password) {
-            errorHandler(setErrors, { noEmailPassword: true })
+            errorHandler({ noEmailPassword: true })
             return
         }
 
@@ -54,10 +37,10 @@ const SignUp = () => {
 
         if (error) {
             if (error.message.includes('User already registered')) {
-                errorHandler(setErrors, { repeatEmail: true })
+                errorHandler({ repeatEmail: true })
             } else {
-                errorHandler(setErrors, {
-                    register: true,
+                errorHandler({
+                    isError: true,
                     message: error.message,
                 })
             }
@@ -71,11 +54,11 @@ const SignUp = () => {
         <Container>
             <h1>Sign Up</h1>
             <FormAuth
-                content={content}
-                onSubmit={submitHandler}
                 actionType="sign-up"
+                content={contentForm}
+                errors={errors}
+                onSubmit={submitHandler}
             />
-            <Errors {...errors} />
         </Container>
     )
 }

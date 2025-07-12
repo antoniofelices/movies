@@ -16,3 +16,13 @@ export const registerUser = async (
         },
     })
 }
+
+export const signInWithPassword = async (
+    email: string,
+    password: string
+): Promise<AuthResponse> => {
+    return await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+    })
+}
