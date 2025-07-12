@@ -3,7 +3,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     text: string | undefined
     classes?: string
     url?: string
-    variant?: 'blue' | 'red' | 'transparent'
+    variant?: 'blue' | 'transparent'
 }
 
 export type CardsMovieProps = {

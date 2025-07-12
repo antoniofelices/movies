@@ -17,9 +17,9 @@ const MovieList = () => {
 
     return (
         <Container>
-            <h1>Movies List</h1>
+            <h1 className="sr-only">Movies List</h1>
             <div>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-6">
                     {(data as any)?.results.map((movie: MovieProps) => (
                         <MovieCard content={movie} key={movie.id} />
                     ))}

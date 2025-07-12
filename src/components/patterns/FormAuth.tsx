@@ -95,7 +95,6 @@ const FormAuth = ({
                         type="submit"
                         classes={`w-full col-span-12 my-4`}
                         text={textButton}
-                        variant="red"
                     />
                 </div>
             </form>

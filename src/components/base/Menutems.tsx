@@ -20,7 +20,7 @@ const MenuItems = ({
     return (
         <>
             {menuData.map((item) => (
-                <li key={item.id} className={classesListElement}>
+                <li key={item.id} className={`font-bold ${classesListElement}`}>
                     <Link to={`/${item.url}` as any}>{item.text}</Link>
                 </li>
             ))}

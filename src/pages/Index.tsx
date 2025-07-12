@@ -1,15 +1,53 @@
-// import { heroData } from '@/data/pagesData/home'
+import content from '@/data/pagesData/index'
 import Container from '@components/base/Container'
+import { Link } from '@tanstack/react-router'
+import imageRandom from '@/assets/images/the-last-of-us.webp'
 
 const Index = () => {
     return (
         <Container>
-            <h1>Home</h1>
-            {/* <Hero
-                content={heroData}
-                image={illustrationHero}
-                backgroundImage={true}
-            /> */}
+            <section>
+                <div className="grid max-w-screen-xl lg:px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                    <div className="mr-auto place-self-center lg:col-span-7">
+                        <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl ">
+                            {content.title}
+                        </h1>
+                        <p className="max-w-2xl my-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                            {content.textIntro}
+                        </p>
+                        <Link
+                            to="/sign-in"
+                            className="inline-flex items-center justify-center px-5 py-3 mb-6 lg:mb-0 lg:mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+                        >
+                            {content.textButtonSignIn}
+                            <svg
+                                className="w-5 h-5 ml-2 -mr-1"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clipRule="evenodd"
+                                ></path>
+                            </svg>
+                        </Link>
+                        <Link
+                            to="/movie/list"
+                            className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-700 rounded-lg hover:bg-blue-300 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-blue-300 dark:hover:text-blue-900 dark:focus:ring-blue-300"
+                        >
+                            {content.textButtonMovieList}
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            <img
+                className="h-auto max-w-full"
+                src={imageRandom}
+                alt={content.altimage}
+            />
         </Container>
     )
 }
