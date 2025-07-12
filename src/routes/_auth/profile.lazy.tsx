@@ -2,6 +2,7 @@ import { createLazyFileRoute } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
 import { useNavigate } from '@tanstack/react-router'
 import Container from '@components/base/Container'
+import Button from '@/components/base/Button'
 
 export const Route = createLazyFileRoute('/_auth/profile')({
     component: RouteComponent,
@@ -21,8 +22,8 @@ function RouteComponent() {
 
     return (
         <Container>
-            <h1>Hello User</h1>
-            <button onClick={handleLogout}>Cerrar sesión</button>
+            <h1 className="mb-8">Hello User</h1>
+            <Button onClick={handleLogout} text="Cerrar sesión" />
         </Container>
     )
 }

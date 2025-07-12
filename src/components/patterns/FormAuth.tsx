@@ -29,7 +29,7 @@ const FormAuth = ({
     return (
         <>
             <form className="py-6" onSubmit={onSubmit}>
-                <div className="grid lg:grid-cols-12 lg:justify-items-start">
+                <div className="grid grid-cols-12 lg:justify-items-start">
                     {isSignUp && (
                         <div className="relative w-full col-span-12 my-4">
                             <label htmlFor={userNameId} className="sr-only">
@@ -39,7 +39,7 @@ const FormAuth = ({
                                 type="text"
                                 name="username"
                                 id={userNameId}
-                                className=""
+                                className="bg-gray-100 border border-gray-500 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 px-4"
                                 placeholder={content.labelUserName}
                                 required
                             />
@@ -53,7 +53,7 @@ const FormAuth = ({
                             type="email"
                             name="email"
                             id={emailId}
-                            className=""
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 px-4"
                             placeholder={content.labelEmail}
                             required
                         />
@@ -66,7 +66,7 @@ const FormAuth = ({
                             type="password"
                             name="password"
                             id={passwordId}
-                            className=""
+                            className="bg-gray-100 border border-gray-500 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 px-4"
                             pattern=".{6,}"
                             placeholder={content.labelPassword}
                             required
@@ -85,7 +85,7 @@ const FormAuth = ({
                                 name="confirmpassword"
                                 id={confirmPasswordId}
                                 pattern=".{6,}"
-                                className=""
+                                className="bg-gray-100 border border-gray-500 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 px-4"
                                 placeholder={content.labelConfirmPassword}
                                 required
                             />
