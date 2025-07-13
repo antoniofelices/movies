@@ -1,4 +1,4 @@
-import content from '@/data/pagesData/index'
+import content from '@/data/pages/index'
 import Container from '@components/base/Container'
 import { Link } from '@tanstack/react-router'
 import imageRandom from '@/assets/images/the-last-of-us.webp'

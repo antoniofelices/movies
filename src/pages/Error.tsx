@@ -1,5 +1,5 @@
 import Container from '@components/base/Container'
-import allData from '@/data/pagesData/error'
+import allData from '@/data/pages/error'
 import pictureColleDelleFinestre from '@/assets/images/error404-finestre.webp'
 import { Link } from '@tanstack/react-router'
 

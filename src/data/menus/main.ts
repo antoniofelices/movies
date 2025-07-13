@@ -1,6 +1,6 @@
 import type { RoutesProps } from '@/types/interfaces'
 
-const mainMenuData: RoutesProps[] = [
+const main: RoutesProps[] = [
     {
         id: 1,
         url: '/',
@@ -15,4 +15,4 @@ const mainMenuData: RoutesProps[] = [
     },
 ]
 
-export default mainMenuData
+export default main
