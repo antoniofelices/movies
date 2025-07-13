@@ -30,6 +30,7 @@ apiSingleMovieData.interceptors.response.use(
 )
 
 const fetchDiscoverMovies = () => apiMoviesData.get(APIMOVIESQUERYDISCOVER)
+
 const fetchMovieById = (id: number): Promise<MovieProps> =>
     apiSingleMovieData.get(`/movie/${id}`)
 const fetchCastByMovie = (id: number): Promise<CreditsMovieProps> =>
