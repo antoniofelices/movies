@@ -4,7 +4,6 @@ import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 
 import Container from '@components/base/Container'
-import Button from '@/components/base/Button'
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/config/config'
 
@@ -46,22 +45,63 @@ const SingleMovie = ({ id }: { id: number }) => {
 
     return (
         <Container>
-            <h1>{movie.title}</h1>
-            <p>{movie.tagline}</p>
-            <p>{movie.overview}</p>
-            <Button onClick={backHandler} text="back" />
-            <h2>Cast</h2>
-            <div className="grid grid-cols-4 gap-4">
-                {filterCast?.map((item) => (
-                    <div key={item.id}>
+            <article>
+                <div className="grid lg:grid-cols-3 gap-7 place-content-between">
+                    {movie.poster_path && (
                         <img
-                            src={`${APIMOVIESIMAGESURL}${item.profile_path}`}
-                            alt=""
+                            src={`${APIMOVIESIMAGESURL}${movie.poster_path}`}
+                            alt={`movie poster ${movie.title}`}
                         />
-                        <h3>{item.name}</h3>
+                    )}
+                    <div className="lg:col-start-2 lg:col-end-4">
+                        <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
+                            {movie.title}
+                        </h1>
+                        <p className="py-8 font-bold">{movie.tagline}</p>
+                        <p className="max-w-2xl my-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                            {movie.overview}
+                        </p>
                     </div>
-                ))}
-            </div>
+                </div>
+
+                <h2 className="max-w-2xl my-8 text-3xl font-extrabold tracking-tight leading-none md:text-3xl">
+                    Cast
+                </h2>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    {filterCast?.map((item) => (
+                        <div key={item.id}>
+                            <img
+                                src={`${APIMOVIESIMAGESURL}${item.profile_path}`}
+                                alt=""
+                            />
+                            <div className="bg-white dark:bg-blue-500 p-4 lg:mx-0">
+                                <h3 className="text-sm font-bold">
+                                    {item.name}
+                                </h3>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </article>
+            <button
+                onClick={backHandler}
+                className="flex gap-2 items-center mt-8"
+            >
+                {' '}
+                <svg
+                    className="w-3 h-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        fillRule="evenodd"
+                        d="M9.707 3.293a1 1 0 00-1.414 0l-6 6a1 1 0 000 1.414l6 6a1 1 0 001.414-1.414L5.414 11H17a1 1 0 100-2H5.414l4.293-4.293a1 1 0 000-1.414z"
+                        clipRule="evenodd"
+                    ></path>
+                </svg>
+                Back
+            </button>
         </Container>
     )
 }

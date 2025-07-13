@@ -13,10 +13,12 @@ export const Route = createRootRoute({
 
 function RootComponent() {
     return (
-        <QueryClientProvider client={queryClient}>
-            <Outlet />
-            <TanStackRouterDevtools />
-            <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+        <div className="antialiased bg-gray-100 text-gray-900 dark:text-white dark:bg-blue-900 min-h-dvh">
+            <QueryClientProvider client={queryClient}>
+                <Outlet />
+                <TanStackRouterDevtools />
+                <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+        </div>
     )
 }

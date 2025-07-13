@@ -1,24 +1,36 @@
-import Button from '@/components/base/Button'
 import type { MovieProps } from '@/types/interfaces'
 import { APIMOVIESIMAGESURL } from '@/config/config'
+import { useNavigate } from '@tanstack/react-router'
 
 const MovieCard = ({ content }: { content: MovieProps }) => {
+    const navigate = useNavigate()
+
+    const handleCardClick = () => {
+        navigate({ to: `/movie/${content.id}` })
+    }
+
     return (
-        <div className="mx-8 my-8 flex flex-col items-center justify-between gap-3 rounded-lg bg-white p-10 shadow-lg shadow-gray-300/100 lg:mx-0">
+        <div
+            onClick={handleCardClick}
+            className="flex flex-col rounded-lg cursor-pointer"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleCardClick()
+                }
+            }}
+        >
             {content.poster_path && (
                 <img
                     src={`${APIMOVIESIMAGESURL}${content.poster_path}`}
                     alt={`movie poster ${content.title}`}
                 />
             )}
-            <h2 className="items-center text-lg font-bold">{content.title}</h2>
-            <p className="text-sm">{content.overview}</p>
-            <Button
-                type="button"
-                text="Ver"
-                classes="text-xs"
-                url={`/movie/${content.id}`}
-            />
+            <div className="bg-white dark:bg-blue-500 p-6 lg:mx-0">
+                <h2 className="text-sm font-bold">{content.title}</h2>
+            </div>
         </div>
     )
 }

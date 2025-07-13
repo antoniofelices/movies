@@ -8,21 +8,30 @@
     --color-black: #000000;
     --color-white: #ffffff;
 
-    --color-blue: #5266df;
-    --color-blue-100: #97a3eb;
-    --color-blue-700: #242946;
-    --color-blue-900: #080a16;
+    --color-blue: #00b3e5;
+    --color-blue-100: #e5f7fc;
+    --color-blue-200: #cceff9;
+    --color-blue-300: #99e0f4;
+    --color-blue-400: #32c2ea;
+    --color-blue-500: #032541;
+    --color-blue-600: #005972;
+    --color-blue-700: #003544;
+    --color-blue-800: #00232d;
+    --color-blue-900: #00181f;
 
-    --color-red: #fb5859;
+    --color-red: #d00000;
+    --color-yellow: #ffba08;
 
-    --color-gray: #96979b;
-    --color-gray-100: #fafbfb;
-    --color-gray-200: #e6e7e8;
-    --color-gray-300: #c8c9cb;
-    --color-gray-400: #a9a9a9;
-    --color-gray-500: #78797e;
-    --color-gray-600: #2c2c2e;
-    --color-gray-700: #0f0f10;
+    --color-gray: #808080;
+    --color-gray-100: #f2f2f2;
+    --color-gray-200: #e5e5e5;
+    --color-gray-300: #d8d8d8;
+    --color-gray-400: #cccccc;
+    --color-gray-500: #737373;
+    --color-gray-600: #4c4c4c;
+    --color-gray-700: #404040;
+    --color-gray-800: #262626;
+    --color-gray-900: #0c0c0c;
 
     --font-*: initial;
     --font-sans:

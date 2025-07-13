@@ -8,7 +8,6 @@ const initialErrors: FormErrors = {
     register: false,
     message: '',
 }
-
 export const useFormErrors = () => {
     const [errors, setErrors] = useState(initialErrors)
 
