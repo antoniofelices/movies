@@ -27,6 +27,15 @@ export type MovieProps = {
     vote_count?: number
 }
 
+export type PersonProps = {
+    id: number
+    biography?: string
+    birthday?: string
+    name: string
+    profile_path?: string
+    place_of_birth?: string
+}
+
 export type CastProps = {
     id: number
     name: string

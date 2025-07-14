@@ -1,5 +1,9 @@
 import axios from 'axios'
-import type { MovieProps, CreditsMovieProps } from '@/types/interfaces'
+import type {
+    MovieProps,
+    CreditsMovieProps,
+    PersonProps,
+} from '@/types/interfaces'
 
 import {
     APIMOVIESBASEURL,
@@ -33,7 +37,16 @@ const fetchDiscoverMovies = () => apiMoviesData.get(APIMOVIESQUERYDISCOVER)
 
 const fetchMovieById = (id: number): Promise<MovieProps> =>
     apiSingleMovieData.get(`/movie/${id}`)
+
 const fetchCastByMovie = (id: number): Promise<CreditsMovieProps> =>
     apiSingleMovieData.get(`/movie/${id}/credits`)
 
-export { fetchDiscoverMovies, fetchMovieById, fetchCastByMovie }
+const fetchPersonById = (id: number): Promise<PersonProps> =>
+    apiSingleMovieData.get(`/person/${id}`)
+
+export {
+    fetchDiscoverMovies,
+    fetchMovieById,
+    fetchCastByMovie,
+    fetchPersonById,
+}

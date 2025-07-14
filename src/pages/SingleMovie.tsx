@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
-import { useRouter } from '@tanstack/react-router'
 import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
-
 import Container from '@components/base/Container'
+import PersonCard from '@components/patterns/PersonCard'
+import ButtonBack from '@components/base/ButtonBack'
+
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/config/config'
+import type { CastProps } from '@/types/interfaces'
 
 const SingleMovie = ({ id }: { id: number }) => {
-    const router = useRouter()
-
     const {
         data: castData,
         isPending: castLoading,
@@ -39,10 +39,6 @@ const SingleMovie = ({ id }: { id: number }) => {
     if (castError && castErrorType)
         return <ErrorApi message={castErrorType.message} />
 
-    const backHandler = () => {
-        router.history.back()
-    }
-
     return (
         <Container>
             <article>
@@ -68,40 +64,12 @@ const SingleMovie = ({ id }: { id: number }) => {
                     Cast
                 </h2>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                    {filterCast?.map((item) => (
-                        <div key={item.id}>
-                            <img
-                                src={`${APIMOVIESIMAGESURL}${item.profile_path}`}
-                                alt=""
-                            />
-                            <div className="bg-white dark:bg-blue-500 p-4 lg:mx-0">
-                                <h3 className="text-sm font-bold">
-                                    {item.name}
-                                </h3>
-                            </div>
-                        </div>
+                    {filterCast?.map((person: CastProps) => (
+                        <PersonCard content={person} key={person.id} />
                     ))}
                 </div>
             </article>
-            <button
-                onClick={backHandler}
-                className="flex gap-2 items-center mt-8"
-            >
-                {' '}
-                <svg
-                    className="w-3 h-3"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        fillRule="evenodd"
-                        d="M9.707 3.293a1 1 0 00-1.414 0l-6 6a1 1 0 000 1.414l6 6a1 1 0 001.414-1.414L5.414 11H17a1 1 0 100-2H5.414l4.293-4.293a1 1 0 000-1.414z"
-                        clipRule="evenodd"
-                    ></path>
-                </svg>
-                Back
-            </button>
+            <ButtonBack />
         </Container>
     )
 }

@@ -2,6 +2,7 @@ import {
     fetchDiscoverMovies,
     fetchMovieById,
     fetchCastByMovie,
+    fetchPersonById,
 } from '@/config/moviesAxiosConfig'
 
 const getMoviesByDiscover = async () => {
@@ -19,4 +20,9 @@ const getCastMovie = async (id: number) => {
     return response
 }
 
-export { getMoviesByDiscover, getSingleMovie, getCastMovie }
+const getPerson = async (id: number) => {
+    const response = await fetchPersonById(id)
+    return response
+}
+
+export { getMoviesByDiscover, getSingleMovie, getCastMovie, getPerson }
