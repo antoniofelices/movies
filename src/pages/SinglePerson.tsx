@@ -3,9 +3,9 @@ import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import Container from '@components/base/Container'
 import ButtonBack from '@components/base/ButtonBack'
-
-import { getPerson } from '@/services/moviesService'
+import { getPerson, getMoviesByPerson } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/config/config'
+import type { MovieCast } from '@/types/interfaces'
 
 const SinglePerson = ({ id }: { id: number }) => {
     const {
@@ -18,20 +18,23 @@ const SinglePerson = ({ id }: { id: number }) => {
         queryFn: () => getPerson(id),
     })
 
-    // const {
-    //     data: movie,
-    //     isPending: movieLoading,
-    //     isError: movieError,
-    //     error: movieErrorType,
-    // } = useQuery({
-    //     queryKey: ['singleMovie', id],
-    //     queryFn: () => getSingleMovie(id),
-    // })
+    const {
+        data: castData,
+        isPending: castLoading,
+        isError: castError,
+        error: castErrorType,
+    } = useQuery({
+        queryKey: ['movies', id],
+        queryFn: () => getMoviesByPerson(id),
+    })
 
-    if (personLoading) return <Loading />
+    if (personLoading || castLoading) return <Loading />
 
     if (personError && personErrorType)
         return <ErrorApi message={personErrorType.message} />
+
+    if (castError && castErrorType)
+        return <ErrorApi message={castErrorType.message} />
 
     return (
         <Container>
@@ -47,11 +50,21 @@ const SinglePerson = ({ id }: { id: number }) => {
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
                             {personData.name}
                         </h1>
-                        <p className="py-8 font-bold">
-                            {personData.place_of_birth}
-                        </p>
+                        {(personData.place_of_birth || personData.birthday) && (
+                            <p className="py-8 font-bold">
+                                {personData.place_of_birth}{' '}
+                                {personData.birthday}
+                            </p>
+                        )}
                         <p className="max-w-2xl my-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                            {personData.biography}
+                            {personData.biography ? (
+                                <>{personData.biography}</>
+                            ) : (
+                                <>
+                                    There is no biography of {personData.name}{' '}
+                                    available.
+                                </>
+                            )}
                         </p>
                     </div>
                 </div>
@@ -59,7 +72,14 @@ const SinglePerson = ({ id }: { id: number }) => {
                 <h2 className="max-w-2xl my-8 text-3xl font-extrabold tracking-tight leading-none md:text-3xl">
                     Filmography
                 </h2>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6"></div>
+                <ul className="">
+                    {castData?.cast?.map((movie: MovieCast) => (
+                        <li>
+                            {movie.release_date} {movie.title} as{' '}
+                            {movie.character}
+                        </li>
+                    ))}
+                </ul>
             </article>
             <ButtonBack />
         </Container>

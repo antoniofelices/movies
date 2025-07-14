@@ -20,7 +20,7 @@ const SingleMovie = ({ id }: { id: number }) => {
     })
 
     const {
-        data: movie,
+        data: movieData,
         isPending: movieLoading,
         isError: movieError,
         error: movieErrorType,
@@ -42,19 +42,19 @@ const SingleMovie = ({ id }: { id: number }) => {
         <Container>
             <article>
                 <div className="grid lg:grid-cols-3 gap-7 place-content-between">
-                    {movie.poster_path && (
+                    {movieData.poster_path && (
                         <img
-                            src={`${APIMOVIESIMAGESURL}${movie.poster_path}`}
-                            alt={`movie poster ${movie.title}`}
+                            src={`${APIMOVIESIMAGESURL}${movieData.poster_path}`}
+                            alt={`movie poster ${movieData.title}`}
                         />
                     )}
                     <div className="lg:col-start-2 lg:col-end-4">
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
-                            {movie.title}
+                            {movieData.title}
                         </h1>
-                        <p className="py-8 font-bold">{movie.tagline}</p>
+                        <p className="py-8 font-bold">{movieData.tagline}</p>
                         <p className="max-w-2xl my-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                            {movie.overview}
+                            {movieData.overview}
                         </p>
                     </div>
                 </div>
