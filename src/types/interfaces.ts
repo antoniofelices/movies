@@ -19,12 +19,40 @@ export type MovieProps = {
     release_date?: string
 }
 
-export type MovieCast = {
+export type PersonCreditProps = {
     id: number
-    character?: string
-    poster_path?: string
-    release_date?: string
+    original_title: string
+    overview: string
+    popularity: number
+    poster_path: string
+    release_date: string
     title: string
+    character?: string
+}
+
+export type PersonMovieProps = {
+    cast: PersonCreditProps[]
+    id: number
+}
+
+export type CastMember = {
+    adult: boolean
+    gender: number
+    id: number
+    known_for_department: string
+    name: string
+    original_name: string
+    popularity: number
+    profile_path?: string
+    cast_id: number
+    character: string
+    credit_id: string
+    order: number
+}
+
+export type CreditsMovieProps = {
+    id: number
+    cast: CastMember[]
 }
 
 export type PersonProps = {
@@ -35,17 +63,6 @@ export type PersonProps = {
     profile_path?: string
     place_of_birth?: string
     cast?: []
-}
-
-export type CastProps = {
-    id: number
-    name: string
-    profile_path?: string
-}
-
-export type CreditsMovieProps = {
-    id: number
-    cast: CastProps[]
 }
 
 export type RoutesProps = {

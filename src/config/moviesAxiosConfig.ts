@@ -34,7 +34,7 @@ const fetchPersonById = (id: number): Promise<PersonProps> =>
     apiMoviesData.get(`/person/${id}`)
 
 const fetcMoviesByPerson = (id: number): Promise<PersonProps> =>
-    apiMoviesData.get(`/person/${id}/credits`)
+    apiMoviesData.get(`/person/${id}/movie_credits`)
 
 export {
     fetchDiscoverMovies,

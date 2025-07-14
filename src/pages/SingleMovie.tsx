@@ -6,7 +6,7 @@ import Card from '@components/patterns/Card'
 import ButtonBack from '@components/base/ButtonBack'
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/config/config'
-import type { CastProps } from '@/types/interfaces'
+import type { CastMember } from '@/types/interfaces'
 
 const SingleMovie = ({ id }: { id: number }) => {
     const {
@@ -62,8 +62,8 @@ const SingleMovie = ({ id }: { id: number }) => {
                 <h2 className="max-w-2xl my-8 text-3xl font-extrabold tracking-tight leading-none md:text-3xl">
                     Cast
                 </h2>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                    {filterCast?.map((person: CastProps) => (
+                <div className="grid gap-6 auto-cols-[minmax(200px,300px)] grid-flow-col overflow-x-scroll">
+                    {filterCast?.map((person: CastMember) => (
                         <Card
                             id={person.id}
                             image={person.profile_path}

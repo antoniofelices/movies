@@ -3,9 +3,10 @@ import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import Container from '@components/base/Container'
 import ButtonBack from '@components/base/ButtonBack'
+import Card from '@/components/patterns/Card'
 import { getPerson, getMoviesByPerson } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/config/config'
-import type { MovieCast } from '@/types/interfaces'
+import type { PersonCreditProps, PersonMovieProps } from '@/types/interfaces'
 
 const SinglePerson = ({ id }: { id: number }) => {
     const {
@@ -27,6 +28,12 @@ const SinglePerson = ({ id }: { id: number }) => {
         queryKey: ['movies', id],
         queryFn: () => getMoviesByPerson(id),
     })
+
+    const orderMovies = (castData as PersonMovieProps)?.cast?.toSorted(
+        (a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)
+    )
+
+    const filterMovies = orderMovies?.filter((c) => c.poster_path)
 
     if (personLoading || castLoading) return <Loading />
 
@@ -72,12 +79,15 @@ const SinglePerson = ({ id }: { id: number }) => {
                 <h2 className="max-w-2xl my-8 text-3xl font-extrabold tracking-tight leading-none md:text-3xl">
                     Filmography
                 </h2>
-                <ul className="">
-                    {castData?.cast?.map((movie: MovieCast) => (
-                        <li>
-                            {movie.release_date} {movie.title} as{' '}
-                            {movie.character}
-                        </li>
+                <ul className="grid gap-6 auto-cols-[minmax(200px,300px)] grid-flow-col overflow-x-scroll">
+                    {filterMovies?.map((movie: PersonCreditProps) => (
+                        <Card
+                            key={movie.id}
+                            id={movie.id}
+                            image={movie.poster_path}
+                            title=" "
+                            type="movie"
+                        />
                     ))}
                 </ul>
             </article>

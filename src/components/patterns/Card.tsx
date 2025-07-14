@@ -9,7 +9,7 @@ const Card = ({
 }: {
     id: number
     image?: string
-    title: string
+    title?: string
     type: string
 }) => {
     const navigate = useNavigate()
@@ -39,9 +39,11 @@ const Card = ({
                     alt={`movie poster ${title}`}
                 />
             )}
-            <div className="bg-white dark:bg-blue-500 p-6 lg:mx-0">
-                <h2 className="text-sm font-bold">{title}</h2>
-            </div>
+            {title && (
+                <div className="bg-white dark:bg-blue-500 p-6 lg:mx-0">
+                    <h2 className="text-sm font-bold">{title}</h2>
+                </div>
+            )}
         </div>
     )
 }
