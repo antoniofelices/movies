@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import Container from '@components/base/Container'
-import PersonCard from '@components/patterns/PersonCard'
+import Card from '@components/patterns/Card'
 import ButtonBack from '@components/base/ButtonBack'
 
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
@@ -65,7 +65,13 @@ const SingleMovie = ({ id }: { id: number }) => {
                 </h2>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     {filterCast?.map((person: CastProps) => (
-                        <PersonCard content={person} key={person.id} />
+                        <Card
+                            id={person.id}
+                            image={person.profile_path}
+                            key={person.id}
+                            title={person.name}
+                            type="person"
+                        />
                     ))}
                 </div>
             </article>

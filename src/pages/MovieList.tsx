@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import Container from '@components/base/Container'
-import MovieCard from '@/components/patterns/MovieCard'
+import Card from '@/components/patterns/Card'
 import { getMoviesByDiscover } from '@/services/moviesService'
 import type { MovieProps } from '@/types/interfaces'
 
@@ -21,7 +21,13 @@ const MovieList = () => {
             <div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {(data as any)?.results.map((movie: MovieProps) => (
-                        <MovieCard content={movie} key={movie.id} />
+                        <Card
+                            id={movie.id}
+                            image={movie.poster_path}
+                            key={movie.id}
+                            title={movie.title}
+                            type="movie"
+                        />
                     ))}
                 </div>
             </div>
