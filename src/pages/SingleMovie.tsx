@@ -4,7 +4,6 @@ import ErrorApi from '@components/base/ErrorApi'
 import Container from '@components/base/Container'
 import Card from '@components/patterns/Card'
 import ButtonBack from '@components/base/ButtonBack'
-
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/config/config'
 import type { CastProps } from '@/types/interfaces'

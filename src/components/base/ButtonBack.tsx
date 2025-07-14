@@ -6,9 +6,9 @@ const ButtonBack = () => {
     const backHandler = () => {
         router.history.back()
     }
+
     return (
         <button onClick={backHandler} className="flex gap-2 items-center mt-8">
-            {' '}
             <svg
                 className="w-3 h-3"
                 fill="currentColor"
