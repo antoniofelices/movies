@@ -23,6 +23,9 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true,
 
+        /* Vitest */
+        "types": ["vitest/globals"],
+
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"],
@@ -38,5 +41,5 @@
             "@services/*": ["src/services/*"]
         }
     },
-    "include": ["src"]
+    "include": ["src", "src/__test__/setupTests.ts"]
 }

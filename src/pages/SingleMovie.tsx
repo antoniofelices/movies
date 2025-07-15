@@ -7,6 +7,7 @@ import ButtonBack from '@components/base/ButtonBack'
 import { getSingleMovie, getCastMovie } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/config/config'
 import type { CastMember } from '@/types/interfaces'
+import { filterArrayOfObjects } from '@helpers/utils'
 
 const SingleMovie = ({ id }: { id: number }) => {
     const {
@@ -29,7 +30,9 @@ const SingleMovie = ({ id }: { id: number }) => {
         queryFn: () => getSingleMovie(id),
     })
 
-    const filterCast = castData?.cast?.filter((c) => c.profile_path)
+    const filterCast = castData?.cast
+        ? filterArrayOfObjects(castData.cast, 'profile_path')
+        : []
 
     if (movieLoading || castLoading) return <Loading />
 
