@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        /* Vitest */
+        "types": ["@vitest/browser/providers/playwright"],
         "paths": {
             "@/*": ["src/*"],
             "@context/*": ["src/context/*"],
