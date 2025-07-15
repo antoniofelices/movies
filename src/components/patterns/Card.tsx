@@ -1,12 +1,23 @@
-import type { MovieProps } from '@/types/interfaces'
 import { APIMOVIESIMAGESURL } from '@/config/config'
 import { useNavigate } from '@tanstack/react-router'
 
-const MovieCard = ({ content }: { content: MovieProps }) => {
+const Card = ({
+    id,
+    image,
+    title,
+    type,
+}: {
+    id: number
+    image?: string
+    title?: string
+    type: string
+}) => {
     const navigate = useNavigate()
 
+    const typeContent = type === 'movie' ? 'movie' : 'person'
+
     const handleCardClick = () => {
-        navigate({ to: `/movie/${content.id}` })
+        navigate({ to: `/${typeContent}/${id}` })
     }
 
     return (
@@ -22,17 +33,19 @@ const MovieCard = ({ content }: { content: MovieProps }) => {
                 }
             }}
         >
-            {content.poster_path && (
+            {image && (
                 <img
-                    src={`${APIMOVIESIMAGESURL}${content.poster_path}`}
-                    alt={`movie poster ${content.title}`}
+                    src={`${APIMOVIESIMAGESURL}${image}`}
+                    alt={`movie poster ${title}`}
                 />
             )}
-            <div className="bg-white dark:bg-blue-500 p-6 lg:mx-0">
-                <h2 className="text-sm font-bold">{content.title}</h2>
-            </div>
+            {title && (
+                <div className="bg-white dark:bg-blue-500 p-6 lg:mx-0">
+                    <h2 className="text-sm font-bold">{title}</h2>
+                </div>
+            )}
         </div>
     )
 }
 
-export default MovieCard
+export default Card

@@ -1,5 +1,6 @@
 import { useNavigate } from '@tanstack/react-router'
 import FormAuth from '@/components/patterns/FormAuth'
+import Logo from '@/components/base/Logo'
 import contentForm from '@data/formAuth'
 import { registerUser } from '@/services/supabaseService'
 import { getUserData } from '@/helpers/formAuthUtils'
@@ -51,13 +52,16 @@ const SignUp = () => {
 
     return (
         <div className="grid h-screen place-items-center">
-            <h1 className="sr-only">Sign Up</h1>
-            <FormAuth
-                actionType="sign-up"
-                content={contentForm}
-                errors={errors}
-                onSubmit={submitHandler}
-            />
+            <div>
+                <Logo />
+                <h1 className="sr-only">Sign Up</h1>
+                <FormAuth
+                    actionType="sign-up"
+                    content={contentForm}
+                    errors={errors}
+                    onSubmit={submitHandler}
+                />
+            </div>
         </div>
     )
 }
