@@ -2,22 +2,31 @@
 
 ## Description
 
-Sprint 7
+Sprint 7. This is an exercise. It involves consuming data from APIs. It also involves using an authentication service by Supabase.
 
-<img src="src/assets/images/preview-01.webp" alt="Preview" width="200"/>
+<img src="src/assets/images/preview-01.webp" alt="Preview" width="400"/>
 
 ### Some decisions
 
 - Use Vite and Vitest as development tools.
 - Start using TypeScript from the beginning.
 - Include TanStack Router and TanStack Query.
+- Use Supabase authentication service.
+
+### API keys from
+
+In order to use the Supabase Auth functionality, you will require an API key [Supabase](https://supabase.com/)
+In order to watch the films, you will require an API key [TMDB API](https://www.themoviedb.org/)
 
 ## Technologies
 
-- JavaScript.
+- React.
 - Typescript.
 - Vite.
 - Vitest.
+- Axios.
+- TanStack Query.
+- TanStack Router.
 - Taildwind.
 
 ## Requirements
@@ -32,7 +41,7 @@ Sprint 7
 1. Clone this repo
 
 ```bash
-$ git clone  .
+$ git clone  https://github.com/antoniofelices/movies .
 ```
 
 2. Install packages
@@ -50,7 +59,7 @@ $ npm run dev
 ## Future Improvements
 
 - Add tests.
-- Work on the Login page.
+- Create a profile table in Supabase to save custom user data.
 - Move the errors to a separate log file.
 
 ## Contributing
