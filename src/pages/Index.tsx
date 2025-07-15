@@ -2,8 +2,11 @@ import content from '@/data/pages/index'
 import Container from '@components/base/Container'
 import imageRandom from '@/assets/images/the-last-of-us.webp'
 import Button from '@/components/base/Button'
+import { useIsAuth } from '@/hooks/useIsAuth'
 
 const Index = () => {
+    const { isLoggedIn } = useIsAuth()
+
     return (
         <Container>
             <section>
@@ -15,13 +18,16 @@ const Index = () => {
                         <p className="max-w-2xl my-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                             {content.textIntro}
                         </p>
-                        <Button
-                            url="/sign-in"
-                            classes="mr-4"
-                            text={content.textButtonSignIn}
-                            icon={true}
-                            orientationIcon="right"
-                        />
+                        {!isLoggedIn && (
+                            <Button
+                                url="/sign-in"
+                                classes="mr-4"
+                                text={content.textButtonSignIn}
+                                icon={true}
+                                orientationIcon="right"
+                            />
+                        )}
+
                         <Button
                             url="/movie/list"
                             text={content.textButtonMovieList}
