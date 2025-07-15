@@ -61,6 +61,7 @@ $ npm run dev
 - Add tests.
 - Create a profile table in Supabase to save custom user data.
 - Move the errors to a separate log file.
+- Random movie frontpage.
 
 ## Contributing
 
