@@ -7,6 +7,7 @@ import Card from '@/components/patterns/Card'
 import { getPerson, getMoviesByPerson } from '@/services/moviesService'
 import { APIMOVIESIMAGESURL } from '@/config/config'
 import type { PersonCreditProps, PersonMovieProps } from '@/types/interfaces'
+import { filterArrayOfObjects } from '@helpers/utils'
 
 const SinglePerson = ({ id }: { id: number }) => {
     const {
@@ -33,7 +34,9 @@ const SinglePerson = ({ id }: { id: number }) => {
         (a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)
     )
 
-    const filterMovies = orderMovies?.filter((c) => c.poster_path)
+    const filterMovies = orderMovies
+        ? filterArrayOfObjects(orderMovies, 'poster_path')
+        : []
 
     if (personLoading || castLoading) return <Loading />
 
