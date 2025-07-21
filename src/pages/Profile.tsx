@@ -3,6 +3,7 @@ import { supabase } from '@/services/supabaseService'
 import Container from '@components/base/Container'
 import Button from '@components/base/Button'
 import ErrorApi from '@components/base/ErrorApi'
+import content from '@data/pages/profile'
 
 const Profile = () => {
     const navigate = useNavigate()
@@ -16,8 +17,8 @@ const Profile = () => {
 
     return (
         <Container>
-            <h1 className="mb-8">Hello User</h1>
-            <Button onClick={handleLogout} text="Cerrar sesión" />
+            <h1 className="mb-8">{content.title}</h1>
+            <Button onClick={handleLogout} text={content.textButtonSignOut} />
         </Container>
     )
 }
