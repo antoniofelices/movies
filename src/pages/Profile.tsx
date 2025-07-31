@@ -3,7 +3,7 @@ import { supabase } from '@/services/supabaseService'
 import Container from '@components/base/Container'
 import Button from '@components/base/Button'
 import ErrorApi from '@components/base/ErrorApi'
-import content from '@data/pages/profile'
+import content from '@/config/data/pages/profile'
 
 const Profile = () => {
     const navigate = useNavigate()

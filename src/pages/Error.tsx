@@ -1,5 +1,5 @@
 import Container from '@components/base/Container'
-import content from '@/data/pages/error'
+import content from '@/config/data/pages/error'
 import pictureColleDelleFinestre from '@/assets/images/error404-finestre.webp'
 import Button from '@/components/base/Button'
 import { useIsAuth } from '@/hooks/useIsAuth'
