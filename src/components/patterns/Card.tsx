@@ -23,7 +23,7 @@ const Card = ({
     return (
         <div
             onClick={handleCardClick}
-            className="flex flex-col rounded-lg cursor-pointer"
+            className="rounded-lg cursor-pointer bg-white dark:bg-blue-500"
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
@@ -33,17 +33,21 @@ const Card = ({
                 }
             }}
         >
-            {image && (
-                <img
-                    src={`${APIMOVIESIMAGESURL}${image}`}
-                    alt={`movie poster ${title}`}
-                />
-            )}
-            {title && (
-                <div className="bg-white dark:bg-blue-500 p-6 lg:mx-0">
-                    <h2 className="text-sm font-bold">{title}</h2>
-                </div>
-            )}
+            <div className="flex flex-col">
+                {image && (
+                    <img
+                        src={`${APIMOVIESIMAGESURL}${image}`}
+                        alt={`movie poster ${title}`}
+                    />
+                )}
+                {title && (
+                    <div className="p-6 lg:mx-0">
+                        <h2 className="text-sm font-bold text-center">
+                            {title}
+                        </h2>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

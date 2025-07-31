@@ -1,8 +1,8 @@
 import Logo from '@/components/base/Logo'
 import MenuItems from '@/components/base/Menutems'
-import main from '@/data/menus/main'
-import action from '@/data/menus/action'
-import user from '@/data/menus/profile'
+import main from '@/config/data/menus/main'
+import action from '@/config/data/menus/action'
+import user from '@/config/data/menus/profile'
 import { Link } from '@tanstack/react-router'
 import { useIsAuth } from '@/hooks/useIsAuth'
 
